@@ -18,25 +18,29 @@
       copy:
         src: files/i3/config
         dest: /home/nmalacarne/.i3/config 
-        owner: nmalacarne
-        group: nmalacarne
-        mode: 0644
 
     - name: Copy i3 status config
       copy:
         src: files/i3/i3status.conf
         dest: /etc/i3status.conf
-        owner: root
-        group: root
-        mode: 0644
+      become_user: nmalacarne
+
+    - name: Copy i3 sensible terminal
+      copy:
+        src: files/i3/i3-sensible-terminal
+        dest: /usr/bin/i3-sensible-terminal
 
     - name: Copy bashrc
       copy:
         src: files/bash/bashrc
         dest: /home/nmalacarne/.bashrc
-        owner: nmalacarne
-        group: nmalacarne
-        mode: 0644
+      become_user: nmalacarne
+
+    - name: Copy bash profile
+      copy:
+        src: files/bash/profile
+        dest: /home/nmalacarne/.profile
+      become_user: nmalacarne
 
     - name: Copy Xresources
       copy:
@@ -47,15 +51,12 @@
       file:
         path: /home/nmalacarne/.vim
         state: directory
-        owner: nmalacarne
-        group: nmalacarne
+      become_user: nmalacarne
 
     - name: Create vim autoload directory
       file:
         path: /home/nmalacarne/.vim/autoload
-        state: directory
-        owner: nmalacarne
-        group: nmalacarne
+      become_user: nmalacarne
 
     - name: Check if vim plug is installed
       stat:
@@ -79,3 +80,19 @@
         src: files/conky/start_conky_maia
         dest: /usr/bin/start_conky_maia
       become_user: nmalacarne
+
+    - name: Create termite config directory
+      file:
+        path: /home/nmalacarne/.config/termite
+        state: directory
+
+    - name: Check termite config
+      stat:
+        path: /home/nmalacarne/.config/termite/config
+      register: termite_config_created
+
+    - name: Setup termite theme
+      get_url:
+        url: https://raw.githubusercontent.com/arcticicestudio/nord-termite/develop/src/config
+        dest: /home/nmalacarne/.config/termite
+      when: not termite_config_created.stat.exists
