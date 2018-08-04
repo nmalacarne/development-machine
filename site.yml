@@ -96,3 +96,13 @@
         url: https://raw.githubusercontent.com/arcticicestudio/nord-termite/develop/src/config
         dest: /home/nmalacarne/.config/termite
       when: not termite_config_created.stat.exists
+
+    - name: Setup bash prompt
+      get_url:
+        url: https://raw.githubusercontent.com/arcticicestudio/igloo/develop/snowblocks/bash/core/prompt
+        dest: /home/nmalacarne/.config/bash_prompt
+
+    - name: Setup directory colors
+      get_url:
+        url: https://raw.githubusercontent.com/arcticicestudio/nord-dircolors/develop/src/dir_colors
+        dest: /home/nmalacarne/.dir_colors

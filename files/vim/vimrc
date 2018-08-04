@@ -4,6 +4,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'StanAngeloff/php.vim'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
@@ -12,6 +13,8 @@ set showmode
 set nobackup
 set noswapfile
 set nocompatible
+
+colorscheme nord
 
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
