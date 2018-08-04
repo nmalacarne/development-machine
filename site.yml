@@ -1,0 +1,81 @@
+---
+
+- hosts: local
+  become: yes
+  tasks:
+
+    - name: Update & Upgrade
+      pacman:
+        update_cache: yes
+        upgrade: yes
+
+    - name: Install termite
+      pacman:
+        name: termite
+        state: present
+
+    - name: Copy i3 config
+      copy:
+        src: files/i3/config
+        dest: /home/nmalacarne/.i3/config 
+        owner: nmalacarne
+        group: nmalacarne
+        mode: 0644
+
+    - name: Copy i3 status config
+      copy:
+        src: files/i3/i3status.conf
+        dest: /etc/i3status.conf
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Copy bashrc
+      copy:
+        src: files/bash/bashrc
+        dest: /home/nmalacarne/.bashrc
+        owner: nmalacarne
+        group: nmalacarne
+        mode: 0644
+
+    - name: Copy Xresources
+      copy:
+        src: files/X/resources
+        dest: /home/nmalacarne/.Xresources
+
+    - name: Create vim directory
+      file:
+        path: /home/nmalacarne/.vim
+        state: directory
+        owner: nmalacarne
+        group: nmalacarne
+
+    - name: Create vim autoload directory
+      file:
+        path: /home/nmalacarne/.vim/autoload
+        state: directory
+        owner: nmalacarne
+        group: nmalacarne
+
+    - name: Check if vim plug is installed
+      stat:
+        path: /home/nmalacarne/.vim/autoload/plug.vim
+      register: vim_plug_installed
+
+    - name: Install vim plug
+      get_url:         
+        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        dest: /home/nmalacarne/.vim/autoload/plug.vim
+      when: not vim_plug_installed.stat.exists
+
+    - name: Copy vim config
+      copy:
+        src: files/vim/vimrc
+        dest: /home/nmalacarne/.vimrc
+      become_user: nmalacarne
+
+    - name: Copy conky config
+      copy:
+        src: files/conky/start_conky_maia
+        dest: /usr/bin/start_conky_maia
+      become_user: nmalacarne
