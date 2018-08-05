@@ -65,6 +65,16 @@
         name: net-tools
         state: present
 
+    - name: Install xclip
+      pacman:
+        name: xclip
+        state: present
+
+    - name: Remove clipit
+      pacman:
+        name: clipit
+        state: absent
+
     - name: Start ebtables
       service:
         name: ebtables
