@@ -106,3 +106,22 @@
       get_url:
         url: https://raw.githubusercontent.com/arcticicestudio/nord-dircolors/develop/src/dir_colors
         dest: /home/nmalacarne/.dir_colors
+
+    - name: Check PHPStorm
+      stat:
+        path: /home/nmalacarne/PhpStorm-182.3684.42
+      register: phpstorm_installed
+
+    - name: Download PHPStorm
+      get_url:
+        url: https://download.jetbrains.com/webide/PhpStorm-2018.2.tar.gz
+        dest: /home/nmalacarne/Downloads
+      when: not phpstorm_installed.stat.exists
+      become_user: nmalacarne
+
+    - name: Unzip PHPStorm
+      unarchive:
+        src: /home/nmalacarne/Downloads/PhpStorm-2018.2.tar.gz
+        dest: /home/nmalacarne
+      when: not phpstorm_installed.stat.exists
+      become_user: nmalacarne
