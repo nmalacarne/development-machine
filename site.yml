@@ -60,6 +60,11 @@
         name: base-devel
         state: present
 
+    - name: Install net tools
+      pacman:
+        name: net-tools
+        state: present
+
     - name: Start ebtables
       service:
         name: ebtables
@@ -200,3 +205,14 @@
         command: require
         global_command: yes
         arguments: laravel/installer
+
+    - name: Add nfs config
+      copy:
+        src: files/etc/nfs.conf
+        dest: /etc/nfs.conf
+
+    - name: Restart NFS service
+      service:
+        name: nfs-server
+        state: restarted
+        enabled: yes
