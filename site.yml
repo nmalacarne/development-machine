@@ -135,3 +135,9 @@
         dest: /home/nmalacarne
       when: not phpstorm_installed.stat.exists
       become_user: nmalacarne
+
+    - name: Install Laravel
+      composer:
+        command: require
+        global_command: yes
+        arguments: laravel/installer
