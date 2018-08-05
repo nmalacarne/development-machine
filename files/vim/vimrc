@@ -13,6 +13,13 @@ set showmode
 set nobackup
 set noswapfile
 set nocompatible
+set tabstop=8
+set shiftwidth=8
+set expandtab
+
+autocmd FileType js setlocal shiftwidth=2 tabstop=2
+autocmd FileType yml setlocal shiftwidth=2 tabstop=2
+autocmd FileType php setlocal shiftwidth=4 tabstop=4
 
 colorscheme nord
 
