@@ -9,6 +9,12 @@
         update_cache: yes
         upgrade: yes
 
+    - name: Add user
+      user:
+        name: nmalacarne
+        groups: libvirt
+        append: yes
+
     - name: Install termite
       pacman:
         name: termite
