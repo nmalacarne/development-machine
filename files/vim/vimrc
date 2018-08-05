@@ -5,6 +5,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'StanAngeloff/php.vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
