@@ -6,6 +6,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'StanAngeloff/php.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'tpope/vim-fugitive'
+Plug 'noahfrederick/vim-laravel'
 
 call plug#end()
 
