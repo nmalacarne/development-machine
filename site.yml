@@ -39,21 +39,43 @@
         name: qemu
         state: present
 
+    - name: Install ebtables
+      pacman:
+        name: ebtables
+        state: present
+
+    - name: Install dnsmasq
+      pacman:
+        name: dnsmasq
+        state: present
+
     - name: Install base development libraries
       pacman:
         name: base-devel
         state: present
 
+    - name: Start ebtables
+      service:
+        name: ebtables
+        state: restarted
+        enabled: yes
+
+    - name: Start dnsmasq
+      service:
+        name: dnsmasq
+        state: restarted
+        enabled: yes
+
     - name: Start libvirt
       service:
         name: libvirtd
-        state: started
+        state: restarted
         enabled: yes
 
     - name: Start virtlog
       service:
         name: virtlogd
-        state: started
+        state: restarted
 
     - name: Copy i3 config
       copy:
