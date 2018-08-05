@@ -34,11 +34,26 @@
         name: virt-manager
         state: present
 
+    - name: Install qemu
+      pacman:
+        name: qemu
+        state: present
+
+    - name: Install base development libraries
+      pacman:
+        name: base-devel
+        state: present
+
     - name: Start libvirt
       service:
         name: libvirtd
         state: started
         enabled: yes
+
+    - name: Start virtlog
+      service:
+        name: virtlogd
+        state: started
 
     - name: Copy i3 config
       copy:
