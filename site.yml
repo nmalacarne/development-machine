@@ -19,6 +19,11 @@
         name: php
         state: present
 
+    - name: Install composer
+      pacman:
+        name: composer
+        state: present
+
     - name: Copy i3 config
       copy:
         src: files/i3/config
