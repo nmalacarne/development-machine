@@ -24,6 +24,22 @@
         name: composer
         state: present
 
+    - name: Install vagrant
+      pacman:
+        name: vagrant
+        state: present
+
+    - name: Install virt manager
+      pacman:
+        name: virt-manager
+        state: present
+
+    - name: Start libvirt
+      service:
+        name: libvirtd
+        state: started
+        enabled: yes
+
     - name: Copy i3 config
       copy:
         src: files/i3/config
