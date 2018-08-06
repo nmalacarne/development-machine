@@ -9,12 +9,6 @@
         update_cache: yes
         upgrade: yes
 
-    - name: Add user
-      user:
-        name: nmalacarne
-        groups: libvirt
-        append: yes
-
     - name: Install termite
       pacman:
         name: termite
@@ -107,7 +101,6 @@
       copy:
         src: files/i3/i3status.conf
         dest: /etc/i3status.conf
-      become_user: nmalacarne
 
     - name: Copy i3 sensible terminal
       copy:
@@ -140,6 +133,7 @@
     - name: Create vim autoload directory
       file:
         path: /home/nmalacarne/.vim/autoload
+        state: directory
       become_user: nmalacarne
 
     - name: Check if vim plug is installed
@@ -163,7 +157,6 @@
       copy:
         src: files/conky/start_conky_maia
         dest: /usr/bin/start_conky_maia
-      become_user: nmalacarne
 
     - name: Create termite config directory
       file:
@@ -226,3 +219,10 @@
         name: nfs-server
         state: restarted
         enabled: yes
+
+    - name: Add user
+      user:
+        name: nmalacarne
+        groups: libvirt
+        append: yes
+
