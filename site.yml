@@ -64,6 +64,11 @@
         name: xclip
         state: present
 
+    - name: Install keychain
+      pacman:
+        name: keychain
+        state: present
+
     - name: Remove clipit
       pacman:
         name: clipit
@@ -225,4 +230,3 @@
         name: nmalacarne
         groups: libvirt
         append: yes
-
