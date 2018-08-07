@@ -148,7 +148,7 @@ export PATH="$PATH:~/.config/composer/vendor/bin"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # setup keychain
-eval $(keychain --eval --quiet id_rsa am nm)
+eval $(keychain --eval --quiet id_rsa)
 
 # source helpful stuff
 source /usr/share/git/git-prompt.sh
