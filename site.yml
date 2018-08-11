@@ -69,6 +69,11 @@
         name: keychain
         state: present
 
+    - name: Install nfs utils
+      pacman:
+        name: nfs-utils
+        state: present
+
     - name: Remove clipit
       pacman:
         name: clipit
